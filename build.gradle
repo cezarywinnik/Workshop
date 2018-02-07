@@ -1,0 +1,48 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: "java"
+apply plugin: "io.qameta.allure"
+
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+configurations {
+    agent
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    agent "org.aspectj:aspectjweaver:1.8.13"
+    testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.5.4"
+    testCompile "org.seleniumhq.selenium:selenium-java:2.41.0"
+    compile "org.testng:testng:6.9.10"
+
+}
+
+allure {
+    version = "2.5"
+    autoconfigure = true
+    aspectjweaver = true
+    useTestNG {
+        version = "2.0-BETA10"
+    }
+    resultsDir = file('build/allure-results')
+    reportDir = file('build/allure-report')
+    downloadLink = 'https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.5.0/allure-2.5.0.zip'
+}
