@@ -3,6 +3,8 @@ version '1.0-SNAPSHOT'
 apply plugin: "java"
 apply plugin: "io.qameta.allure"
 
+defaultTasks "clean", "test"
+
 sourceCompatibility = 1.8
 
 buildscript {
@@ -18,6 +20,8 @@ buildscript {
     }
 }
 
+
+
 configurations {
     agent
 }
@@ -30,18 +34,25 @@ repositories {
 dependencies {
     agent "org.aspectj:aspectjweaver:1.8.13"
     testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.5.4"
-    testCompile "org.seleniumhq.selenium:selenium-java:2.41.0"
-    compile "org.testng:testng:6.9.10"
+    testCompile "org.seleniumhq.selenium:selenium-java:3.9.0"
+    testCompile "com.codeborne:selenide:4.10.01"
+    testCompile "org.testng:testng:6.9.10"
+    testCompile "junit:junit:4.12"
 
+}
+[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
+[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+
+test {
+    useTestNG()
 }
 
 allure {
     version = "2.5"
     autoconfigure = true
     aspectjweaver = true
-    useTestNG {
-        version = "2.0-BETA10"
-    }
+    allureJavaVersion = "2.0-BETA9"
+
     resultsDir = file('build/allure-results')
     reportDir = file('build/allure-report')
     downloadLink = 'https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.5.0/allure-2.5.0.zip'
