@@ -2,6 +2,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: "java"
 apply plugin: "ru.d10xa.allure"
+apply plugin: "com.energizedwork.webdriver-binaries"
 
 defaultTasks "clean", "test"
 
@@ -18,11 +19,10 @@ buildscript {
     dependencies {
         classpath "io.qameta.allure:allure-gradle:2.5"
         classpath "ru.d10xa:gradle-allure-plugin:0.5.5"
+        classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.4"
     }
 
 }
-
-
 
 configurations {
     agent
@@ -55,12 +55,12 @@ test {
 
 allure {
     version = "2.5"
-    //autoconfigure = true
     aspectjweaver = true
     testNG = true
-    //allureJavaVersion = "2.0-BETA9"
-
     allureResultsDir = 'build//allure-results'
     allureReportDir= 'build//allure-report'
-    //downloadLink = 'https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.5.0/allure-2.5.0.zip'
+}
+
+webdriverBinaries {
+    chromedriver "2.32"
 }

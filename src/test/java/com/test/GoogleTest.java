@@ -13,6 +13,7 @@ public class GoogleTest {
 
         @Test
         public void search_selenide_in_google() {
+            System.setProperty("selenide.browser", "Chrome");
             open("https://google.com/ncr");
             $(By.name("q")).val("selenide").pressEnter();
             $$("#ires .g").shouldHave(sizeGreaterThan(1));
