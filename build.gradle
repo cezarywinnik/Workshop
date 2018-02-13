@@ -1,7 +1,7 @@
 version '1.0-SNAPSHOT'
 
 apply plugin: "java"
-apply plugin: "io.qameta.allure"
+apply plugin: "ru.d10xa.allure"
 
 defaultTasks "clean", "test"
 
@@ -17,7 +17,9 @@ buildscript {
 
     dependencies {
         classpath "io.qameta.allure:allure-gradle:2.5"
+        classpath "ru.d10xa:gradle-allure-plugin:0.5.5"
     }
+
 }
 
 
@@ -34,26 +36,31 @@ repositories {
 dependencies {
     agent "org.aspectj:aspectjweaver:1.8.13"
     testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.5.4"
-    testCompile "org.seleniumhq.selenium:selenium-java:3.9.0"
-    testCompile "com.codeborne:selenide:4.10.01"
+    compile "org.seleniumhq.selenium:selenium-java:3.9.0"
+    compile "com.codeborne:selenide:4.10.01"
     testCompile "org.testng:testng:6.9.10"
+    compile "ru.d10xa:gradle-allure-plugin:0.5.5"
     testCompile "junit:junit:4.12"
 
 }
 [compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
 [compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
 
+test.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 test {
     useTestNG()
 }
 
 allure {
     version = "2.5"
-    autoconfigure = true
+    //autoconfigure = true
     aspectjweaver = true
-    allureJavaVersion = "2.0-BETA9"
+    testNG = true
+    //allureJavaVersion = "2.0-BETA9"
 
-    resultsDir = file('build/allure-results')
-    reportDir = file('build/allure-report')
-    downloadLink = 'https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.5.0/allure-2.5.0.zip'
+    allureResultsDir = 'build//allure-results'
+    allureReportDir= 'build//allure-report'
+    //downloadLink = 'https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.5.0/allure-2.5.0.zip'
 }
