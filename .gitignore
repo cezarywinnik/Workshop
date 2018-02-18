@@ -5,3 +5,4 @@ allure-results
 gradle
 build
 out
+debug.log
