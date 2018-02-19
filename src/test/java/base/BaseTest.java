@@ -2,16 +2,19 @@ package base;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.CHROME;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
-import static config.TestConfig.setChrome;
-import static pageobject.MainPage.openHomePage;
+import static config.BrowserProperties.setUpWebBrowser;
+import static config.TestConfig.HOME_PAGE;
 
 public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        setChrome();
-        openHomePage();
+        setUpWebBrowser(CHROME);
+        open(HOME_PAGE);
     }
 
     @AfterMethod
