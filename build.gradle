@@ -20,7 +20,7 @@ buildscript {
         classpath "io.qameta.allure:allure-gradle:2.5"
         classpath "ru.d10xa:gradle-allure-plugin:0.5.5"
         classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.4"
-    }
+        }
 
 }
 
@@ -57,10 +57,22 @@ allure {
     version = "2.5"
     aspectjweaver = true
     testNG = true
-    allureResultsDir = 'build//allure-results'
-    allureReportDir= 'build//allure-report'
+    allureResultsDir = "$buildDir/allure-results"
+    allureReportDir= "$buildDir/allure-report"
 }
 
 webdriverBinaries {
     chromedriver "2.32"
 }
+
+
+task serve  {
+    doLast {
+        SimpleHttpFileServerFactory factory = new SimpleHttpFileServerFactory()
+        HttpFileServer server = factory.start(new File("$buildDir/allure-report/"), 8085)
+        println("Server Started on 8085 ctrc+c to kill it")
+        println("http://localhost:8085/index.html")
+        java.lang.Thread.sleep(Long.MAX_VALUE);
+    }
+}
+
