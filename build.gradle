@@ -43,8 +43,8 @@ dependencies {
     testCompile "junit:junit:4.12"
 
 }
-[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
-[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+[compileJava, compileTestJava]*.options.collect { options -> options.encoding = 'UTF-8' }
+[compileJava, compileTestJava]*.options.collect { options -> options.debug = true }
 
 test.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -62,9 +62,8 @@ allure {
 }
 
 webdriverBinaries {
-    chromedriver "2.32"
+    chromedriver "2.34"
 }
-
 
 task serve  {
     doLast {
@@ -75,4 +74,3 @@ task serve  {
         java.lang.Thread.sleep(Long.MAX_VALUE);
     }
 }
-
