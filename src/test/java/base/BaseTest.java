@@ -12,7 +12,7 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static config.TestConfig.ENVIRONMENT_URL;
 
 public class BaseTest {
-    @BeforeMethod (alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         browser = CHROME;
         startMaximized = true;
@@ -20,7 +20,7 @@ public class BaseTest {
         open(baseUrl);
     }
 
-    @AfterMethod (alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         closeWebDriver();
     }
