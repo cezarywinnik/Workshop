@@ -1,5 +1,6 @@
 package base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -14,6 +15,7 @@ import static config.TestConfig.ENVIRONMENT_URL;
 public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
+        WebDriverManager.chromedriver().version("77.0.3865.40").setup();
         browser = CHROME;
         startMaximized = true;
         baseUrl = ENVIRONMENT_URL;

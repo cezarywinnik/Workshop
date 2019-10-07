@@ -2,6 +2,7 @@ package testsExample;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,23 +20,24 @@ import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public class UbsTest {
     private final int FIRST_LINK = 0;
-    private final SelenideElement SEARCH_FIELD = $(".gsfi");
-    private final SelenideElement UBS_LOGO = $("a[title='UBS']");
-    private final ElementsCollection LIST_OF_RESULTS = $$(".rc .r >a");
+    private SelenideElement searchField = $(".gLFyf");
+    private SelenideElement UBS_LOGO = $(".logo__img");
+    private ElementsCollection listOfResults = $$(".rc .r >a");
 
     private SelenideElement getTheLinkInTheList(int linkNumber) {
-        return LIST_OF_RESULTS.get(linkNumber);
+        return listOfResults.get(linkNumber);
     }
 
     private void searchForUbs() {
         String SEARCH_VALUE = "UBS";
-        SEARCH_FIELD
+        searchField.click();
+        searchField
                 .setValue(SEARCH_VALUE)
                 .sendKeys(Keys.ENTER);
     }
 
     private void checkThatUbsLinkIsOnTheFirstPosition() {
-        getTheLinkInTheList(FIRST_LINK).shouldHave(text("Our financial services around the globe | UBS Global topics"));
+        getTheLinkInTheList(FIRST_LINK).shouldHave(text("Our financial services in your country | UBS United States"));
     }
 
     private void clickOnFirstLinkFromSearchResults() {
@@ -48,6 +50,7 @@ public class UbsTest {
 
     @BeforeMethod
     public void setUpGoogle() {
+        WebDriverManager.chromedriver().version("77.0.3865.40").setup();
         browser = CHROME;
         startMaximized = true;
         open("https://google.com");

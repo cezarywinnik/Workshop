@@ -62,7 +62,7 @@ allure {
 }
 
 webdriverBinaries {
-    chromedriver "2.34"
+    chromedriver "77.0.3865.40"
 }
 
 task serve  {

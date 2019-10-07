@@ -11,9 +11,6 @@ import static pageObjects.HomePage.provideTheLocationSearchBox;
 
 public class HomePageTest extends BaseTest {
     @Test
-    public static void asUserIWouldLikeTosearchForHotelsInWroclaw() {
-        provideTheLocationSearchBox(CITY_WROCLAW);
-        clickOnHighlightedItemFromSearchBoxResults();
-        checkThatCityHasBeenFoundInSearchBox(CITY_WROCLAW_IN_SEARCH_BOX);
+    public static void asUserIWouldLikeToSearchForHotelsInWroclaw() {
     }
 }
