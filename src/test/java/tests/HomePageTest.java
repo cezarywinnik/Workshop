@@ -3,7 +3,7 @@ package tests;
 import base.BaseTest;
 import org.testng.annotations.Test;
 
-import static pageObjects.HomePage.searchForProduct;
+import static pageObjects.MainPage.searchForProduct;
 
 public class HomePageTest extends BaseTest {
     @Test
