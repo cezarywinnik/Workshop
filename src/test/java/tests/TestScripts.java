@@ -9,5 +9,6 @@ public class TestScripts extends BaseTest {
     @Test
     public static void asUserIWouldLikeToSearchForAProduct() {
         searchForProduct("Faded");
+        
     }
 }
