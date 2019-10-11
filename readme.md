@@ -27,7 +27,7 @@ MAC configuration:
 6. Download repository
 7. Open project from build.gradle file
 8. In project settings (File -> settings-> Build, Execution, Deployment ->Gradle ->)
-   set directory to gradle installation folder (C:/Gradle/gradle-4.10.2)
+   set directory to gradle installation folder (...gradle-4.10.2)
 9. Wait until all dependencies are resolved
 10. Click View -> Tool Windows -> Gradle (on the right panel you should see gradle project)
 11. Select run configurations and click Workshop [clean]
